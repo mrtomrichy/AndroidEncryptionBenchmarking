@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                tools:context=".MainActivity">
+
+    <LinearLayout
+        android:focusable="true" android:focusableInTouchMode="true"
+        android:layout_width="0px" android:layout_height="0px"
+        android:id="@+id/linearLayout"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/keySize"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="false"
+        android:hint="Key Size (bytes)"
+        android:layout_toRightOf="@+id/keyLabel"
+        android:textSize="14dp"
+        android:layout_marginLeft="16dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/dataSize"
+        android:hint="Data Size (bytes)"
+        android:layout_below="@+id/keySize"
+        android:layout_alignStart="@+id/keySize"
+        android:textSize="14dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Run"
+        android:id="@+id/runButton"
+        android:textSize="16dp"
+        android:layout_below="@+id/dataSize"
+        android:layout_alignParentEnd="true"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/runButton"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/resultsList"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/progressBar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/resultText"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Result"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/runButton"
+        android:layout_below="@+id/dataSize"
+        android:gravity="center_vertical"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Key Size (bytes)"
+        android:id="@+id/keyLabel"
+        android:textSize="14dp"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_alignBaseline="@+id/keySize"
+        android:layout_alignBottom="@+id/keySize"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Data Size (bytes)"
+        android:id="@+id/dataLabel"
+        android:textSize="14dp"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_alignBaseline="@+id/dataSize"
+        android:layout_alignBottom="@+id/dataSize"
+        android:layout_alignParentStart="true"/>
+
+</RelativeLayout>
