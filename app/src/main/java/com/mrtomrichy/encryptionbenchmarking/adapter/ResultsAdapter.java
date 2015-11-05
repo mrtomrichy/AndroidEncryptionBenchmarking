@@ -1,5 +1,6 @@
-package com.mrtomrichy.encryptionbenchmarking;
+package com.mrtomrichy.encryptionbenchmarking.adapter;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,16 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mrtomrichy.encryptionbenchmarking.R;
 import com.mrtomrichy.encryptionbenchmarking.benchmarking.BenchmarkResult;
 
 import java.util.ArrayList;
 
 public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsViewHolder> {
 
-  ArrayList<BenchmarkResult> results;
+  private ArrayList<BenchmarkResult> results;
+  private Context context;
 
-  public ResultsAdapter(ArrayList<BenchmarkResult> results) {
+
+  public ResultsAdapter(ArrayList<BenchmarkResult> results, Context context) {
     this.results = results;
+    this.context = context;
   }
 
   @Override
@@ -46,7 +51,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsV
       resultsViewHolder.nameText.setTextColor(Color.parseColor("#F44336"));
     } else {
       resultsViewHolder.timeText.setVisibility(View.VISIBLE);
-      resultsViewHolder.nameText.setTextColor(Color.parseColor("#757575"));
+      resultsViewHolder.nameText.setTextColor(context.getResources().getColor(android.R.color.secondary_text_dark));
     }
   }
 

@@ -32,7 +32,6 @@ public class BenchmarkTask extends AsyncTask<Algorithm, BenchmarkResult, Integer
 
   @Override
   protected void onProgressUpdate(BenchmarkResult... progress) {
-//    Log.d("PROGRESS", progress[0]+"");
     if(this.callbacks != null) {
       callbacks.updateProgress(progress[0]);
     }

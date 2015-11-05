@@ -1,15 +1,19 @@
-package com.mrtomrichy.encryptionbenchmarking;
+package com.mrtomrichy.encryptionbenchmarking.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.mrtomrichy.encryptionbenchmarking.R;
+import com.mrtomrichy.encryptionbenchmarking.adapter.ResultsAdapter;
 import com.mrtomrichy.encryptionbenchmarking.benchmarking.BenchmarkResult;
 import com.mrtomrichy.encryptionbenchmarking.benchmarking.BenchmarkTask;
 import com.mrtomrichy.encryptionbenchmarking.encryption.Algorithm;
@@ -17,7 +21,10 @@ import com.mrtomrichy.encryptionbenchmarking.encryption.Encryption;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+/**
+ * Created by tom on 04/11/2015.
+ */
+public class BenchmarkActivity extends Activity {
 
   BenchmarkTask.BenchmarkCallbacks callbacks = new BenchmarkTask.BenchmarkCallbacks() {
     @Override
@@ -56,12 +63,30 @@ public class MainActivity extends Activity {
 
   private ArrayList<BenchmarkResult> results = new ArrayList<>();
 
-  BenchmarkTask currentTask = null;
+  private BenchmarkTask currentTask = null;
+
+  private Algorithm[] selectedAlgorithms;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_benchmark);
+
+    if(getIntent().getExtras().containsKey("algorithms")) {
+      Parcelable[] parcelableArray = getIntent().getExtras().getParcelableArray("algorithms");
+      selectedAlgorithms = new Algorithm[parcelableArray.length];
+      System.arraycopy(parcelableArray, 0, selectedAlgorithms, 0, parcelableArray.length);
+    } else {
+      finish();
+    }
+
+    getActionBar().setDisplayHomeAsUpEnabled(true);
+    getActionBar().setTitle("Benchmark");
+    if(selectedAlgorithms.length != 1) {
+      getActionBar().setSubtitle(selectedAlgorithms.length + " algorithms selected");
+    } else {
+      getActionBar().setSubtitle(selectedAlgorithms[0].name);
+    }
 
     keySizeInput = (EditText) findViewById(R.id.keySize);
     dataSizeInput = (EditText) findViewById(R.id.dataSize);
@@ -91,8 +116,18 @@ public class MainActivity extends Activity {
     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
     mRecyclerView.setLayoutManager(mLayoutManager);
 
-    mAdapter = new ResultsAdapter(results);
+    mAdapter = new ResultsAdapter(results, this);
     mRecyclerView.setAdapter(mAdapter);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   private void runBenchmarks() {
@@ -116,9 +151,7 @@ public class MainActivity extends Activity {
     results.clear();
     mAdapter.notifyDataSetChanged();
 
-    Algorithm[] supportedTypes = Encryption.getSupportedEncryptionTypes();
-
-    mProgressBar.setMax(supportedTypes.length);
+    mProgressBar.setMax(selectedAlgorithms.length);
 
     Encryption.setKeySize(keySize);
 
@@ -126,6 +159,6 @@ public class MainActivity extends Activity {
 
     currentTask = new BenchmarkTask(data, callbacks);
 
-    currentTask.execute(supportedTypes);
+    currentTask.execute(selectedAlgorithms);
   }
 }
