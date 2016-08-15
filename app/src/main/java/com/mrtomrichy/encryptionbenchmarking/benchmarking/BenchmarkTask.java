@@ -47,10 +47,12 @@ public class BenchmarkTask extends AsyncTask<Algorithm, BenchmarkResult, Integer
 
       long startTime = System.currentTimeMillis();
       boolean success = true;
+      String errorMessage = null;
       try{
         Encryption.encrypt(this.data, algorithm);
       } catch(Exception e) {
         success = false;
+        errorMessage = e.getMessage();
       } finally {
         long timeTaken = -1;
 
@@ -59,7 +61,7 @@ public class BenchmarkTask extends AsyncTask<Algorithm, BenchmarkResult, Integer
           timeTaken = System.currentTimeMillis() - startTime;
         }
 
-        BenchmarkResult result = new BenchmarkResult(algorithms[i], success, Encryption.getKeySize(), dataSizeInBytes, timeTaken);
+        BenchmarkResult result = new BenchmarkResult(algorithms[i], success, errorMessage, Encryption.getKeySize(), dataSizeInBytes, timeTaken);
         publishProgress(result);
       }
     }

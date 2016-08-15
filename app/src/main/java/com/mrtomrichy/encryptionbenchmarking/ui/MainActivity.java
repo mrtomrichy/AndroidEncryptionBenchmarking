@@ -83,6 +83,10 @@ public class MainActivity extends Activity {
           item.selected = !item.selected;
           adapter.notifyDataSetChanged();
           updateUI(true);
+        } else {
+          item.selected = !item.selected;
+          adapter.notifyDataSetChanged();
+          updateUI(true);
         }
       }
     });

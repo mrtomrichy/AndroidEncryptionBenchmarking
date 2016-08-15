@@ -1,6 +1,8 @@
 package com.mrtomrichy.encryptionbenchmarking.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,18 +43,38 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsV
 
   @Override
   public void onBindViewHolder(ResultsViewHolder resultsViewHolder, int position) {
-    BenchmarkResult item = results.get(position);
+    final BenchmarkResult item = results.get(position);
 
-    resultsViewHolder.timeText.setText(item.timeTaken+"ms");
     resultsViewHolder.nameText.setText(item.algorithm.name);
 
     if(!item.success) {
-      resultsViewHolder.timeText.setVisibility(View.INVISIBLE);
       resultsViewHolder.nameText.setTextColor(Color.parseColor("#F44336"));
+      resultsViewHolder.timeText.setTextColor(Color.parseColor("#F44336"));
+      resultsViewHolder.timeText.setText("FAILED");
+      resultsViewHolder.timeText.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          showErrorDialog(item.errorMessage);
+        }
+      });
     } else {
-      resultsViewHolder.timeText.setVisibility(View.VISIBLE);
       resultsViewHolder.nameText.setTextColor(context.getResources().getColor(android.R.color.secondary_text_dark));
+      resultsViewHolder.timeText.setTextColor(context.getResources().getColor(android.R.color.secondary_text_dark));
+      resultsViewHolder.timeText.setText(item.timeTaken + "ms");
+      resultsViewHolder.timeText.setOnClickListener(null);
     }
+  }
+
+  private void showErrorDialog(String message) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    builder.setMessage(message)
+        .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int id) {
+            dialog.cancel();
+          }
+        });
+    builder.create().show();
+
   }
 
   public static class ResultsViewHolder extends RecyclerView.ViewHolder {
