@@ -1,8 +1,8 @@
 package com.mrtomrichy.encryptionbenchmarking.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 /**
  * Created by tom on 04/11/2015.
  */
-public class BenchmarkActivity extends Activity {
+public class BenchmarkActivity extends AppCompatActivity {
 
   BenchmarkTask.BenchmarkCallbacks callbacks = new BenchmarkTask.BenchmarkCallbacks() {
     @Override
@@ -80,12 +80,12 @@ public class BenchmarkActivity extends Activity {
       finish();
     }
 
-    getActionBar().setDisplayHomeAsUpEnabled(true);
-    getActionBar().setTitle("Benchmark");
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setTitle("Benchmark");
     if(selectedAlgorithms.length != 1) {
-      getActionBar().setSubtitle(selectedAlgorithms.length + " algorithms selected");
+      getSupportActionBar().setSubtitle(selectedAlgorithms.length + " algorithms selected");
     } else {
-      getActionBar().setSubtitle(selectedAlgorithms[0].name);
+      getSupportActionBar().setSubtitle(selectedAlgorithms[0].name);
     }
 
     keySizeInput = (EditText) findViewById(R.id.keySize);

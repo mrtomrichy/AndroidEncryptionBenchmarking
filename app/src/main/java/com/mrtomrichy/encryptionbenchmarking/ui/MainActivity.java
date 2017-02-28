@@ -1,11 +1,11 @@
 package com.mrtomrichy.encryptionbenchmarking.ui;
 
 import android.animation.ObjectAnimator;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,7 +27,7 @@ import com.mrtomrichy.encryptionbenchmarking.encryption.Encryption;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
   private FloatingActionButton fab;
   private RelativeLayout layout;
@@ -197,7 +197,7 @@ public class MainActivity extends Activity {
   }
 
   private void showCustomMenu() {
-    ActionBar ab = getActionBar();
+    ActionBar ab = getSupportActionBar();
     View v = LayoutInflater.from(this).inflate(R.layout.deselect_menu, null, false);
     ImageButton tick = (ImageButton) v.findViewById(R.id.doneButton);
     customMenuText = (TextView) v.findViewById(R.id.selectedText);
@@ -215,7 +215,7 @@ public class MainActivity extends Activity {
   }
 
   private void hideCustomMenu() {
-    ActionBar ab = getActionBar();
+    ActionBar ab = getSupportActionBar();
     ab.setDisplayShowCustomEnabled(false);
     ab.setDisplayShowTitleEnabled(true);
   }
