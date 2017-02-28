@@ -15,4 +15,5 @@
     <string name="failed">FAILED</string>
     <string name="time_taken">%dms</string>
     <string name="cancel">Cancel</string>
+    <string name="all">All</string>
 </resources>
