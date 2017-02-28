@@ -3,4 +3,16 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="key_size">Key Size (bytes)</string>
+    <string name="data_size">Data Size (bytes)</string>
+    <string name="result">Result</string>
+    <string name="run">Run</string>
+    <string name="stop">Stop</string>
+    <string name="encryption_success_count" formatted="false">%d/%d successful encryptions</string>
+    <string name="benchmark">Benchmark</string>
+    <string name="selected_algorithm_count">%d algorithms selected</string>
+    <string name="total_selected_algorithm_count" formatted="false">%d of %d selected</string>
+    <string name="failed">FAILED</string>
+    <string name="time_taken">%dms</string>
+    <string name="cancel">Cancel</string>
 </resources>

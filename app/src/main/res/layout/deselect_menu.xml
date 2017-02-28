@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
 
   <ImageButton
       android:layout_width="36dp"
       android:layout_height="36dp"
-      android:layout_centerVertical="true"
-      android:layout_alignParentLeft="true"
       android:src="@drawable/ic_done"
       android:id="@+id/doneButton"
       style="@style/Widget.AppCompat.ActionButton" />
@@ -15,13 +15,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/doneButton"
-        android:layout_centerVertical="true"
         android:gravity="center_vertical"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textAllCaps="true"
         android:fontFamily="sans-serif-condensed"
         android:layout_marginLeft="12dp"
         android:id="@+id/selectedText"
+        android:layout_weight="1"
         android:textColor="@android:color/white"/>
-</RelativeLayout>
+</LinearLayout>

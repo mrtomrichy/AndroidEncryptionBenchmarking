@@ -3,13 +3,10 @@
     <color name="primary">#3F51B5</color>
     <color name="primary_dark">#000000</color>
     <color name="accent">#FF4081</color>
+    <color name="failed_red">#F44336</color>
     <color name="accent_ripple">#F06292</color>
-    <color name="foreground_material_light">#ffffff</color>
-    <color name="background_material_dark">#c6c6c6</color>
     <color name="bright_foreground_dark">#000000</color>
     <color name="primary_text_material_dark">#000000</color>
-    <color name="primary_text_default_material_light">#deffffff</color>
-    <color name="secondary_text_default_material_dark">#b3000000</color>
     <color name="secondary_text_material_dark">#000000</color>
     <color name="secondary_text_material_light">#000000</color>
 </resources>

@@ -62,25 +62,6 @@ public class AlgorithmAdapter extends RecyclerView.Adapter<AlgorithmAdapter.View
     } else {
       viewHolder.nameText.setTextColor(Color.WHITE);
     }
-
-    viewHolder.view.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (listener != null) {
-          listener.onAlgorithmPressed(item);
-        }
-      }
-    });
-
-    viewHolder.view.setOnLongClickListener(new View.OnLongClickListener() {
-      @Override
-      public boolean onLongClick(View view) {
-        if(listener != null) {
-          listener.onAlgorithmLongPressed(item);
-        }
-        return true;
-      }
-    });
   }
 
   public int getSelectedCount() {
@@ -102,14 +83,31 @@ public class AlgorithmAdapter extends RecyclerView.Adapter<AlgorithmAdapter.View
     return selectedAlgorithms;
   }
 
-  public static class ViewHolder extends RecyclerView.ViewHolder {
-    public View view;
-    public TextView nameText;
+  class ViewHolder extends RecyclerView.ViewHolder {
+    TextView nameText;
 
-    public ViewHolder(View itemView) {
+    ViewHolder(View itemView) {
       super(itemView);
-      this.view = itemView;
       this.nameText = (TextView) itemView.findViewById(R.id.algorithmNameText);
+
+      itemView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          if (listener != null) {
+            listener.onAlgorithmPressed(results.get(getAdapterPosition()));
+          }
+        }
+      });
+
+      itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View view) {
+          if(listener != null) {
+            listener.onAlgorithmLongPressed(results.get(getAdapterPosition()));
+          }
+          return true;
+        }
+      });
     }
   }
 

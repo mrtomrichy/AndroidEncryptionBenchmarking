@@ -60,9 +60,8 @@ public class Encryption {
     Key key = generateKey(algorithm);
     Cipher c = Cipher.getInstance(algorithm);
     c.init(Cipher.ENCRYPT_MODE, key);
-    byte[] encVal = c.doFinal(Data);
 
-    return encVal;
+    return c.doFinal(Data);
   }
 
   public static byte[] decrypt(byte[] encryptedData, String algorithm) throws Exception {
@@ -70,12 +69,10 @@ public class Encryption {
     Cipher c = Cipher.getInstance(algorithm);
     c.init(Cipher.DECRYPT_MODE, key);
 
-    byte[] decValue = c.doFinal(encryptedData);
-    return decValue;
+    return c.doFinal(encryptedData);
   }
 
   private static Key generateKey(String algorithm) throws Exception {
-    Key key = new SecretKeySpec(keyValue, algorithm);
-    return key;
+    return new SecretKeySpec(keyValue, algorithm);
   }
 }

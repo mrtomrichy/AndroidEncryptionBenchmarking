@@ -13,7 +13,7 @@ public class BenchmarkTask extends AsyncTask<Algorithm, BenchmarkResult, Integer
     void benchmarkFinished(int successfulEncryptions);
   }
 
-  public BenchmarkCallbacks callbacks;
+  private BenchmarkCallbacks callbacks;
 
   private byte[] data;
   private int dataSizeInBytes;
@@ -40,28 +40,28 @@ public class BenchmarkTask extends AsyncTask<Algorithm, BenchmarkResult, Integer
   @Override
   protected Integer doInBackground(Algorithm... algorithms) {
     int successfulEncrypts = 0;
-    for(int i = 0; i < algorithms.length; i++) {
-      if(stopped) return successfulEncrypts;
+    for (Algorithm algorithm : algorithms) {
+      if (stopped) return successfulEncrypts;
 
-      String algorithm = algorithms[i].name;
+      String algorithmName = algorithm.name;
 
       long startTime = System.currentTimeMillis();
       boolean success = true;
       String errorMessage = null;
-      try{
-        Encryption.encrypt(this.data, algorithm);
-      } catch(Exception e) {
+      try {
+        Encryption.encrypt(this.data, algorithmName);
+      } catch (Exception e) {
         success = false;
         errorMessage = e.getMessage();
       } finally {
         long timeTaken = -1;
 
-        if(success) {
+        if (success) {
           successfulEncrypts++;
           timeTaken = System.currentTimeMillis() - startTime;
         }
 
-        BenchmarkResult result = new BenchmarkResult(algorithms[i], success, errorMessage, Encryption.getKeySize(), dataSizeInBytes, timeTaken);
+        BenchmarkResult result = new BenchmarkResult(algorithm, success, errorMessage, Encryption.getKeySize(), dataSizeInBytes, timeTaken);
         publishProgress(result);
       }
     }

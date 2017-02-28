@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
           adapter.notifyDataSetChanged();
           updateUI(true);
         } else {
-          List<Algorithm> algorithm = new ArrayList<Algorithm>();
+          List<Algorithm> algorithm = new ArrayList<>();
           algorithm.add(item.algorithm);
           goToBenchmarks(algorithm);
         }
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     selectedAlgorithms.toArray(algos);
 
     Bundle b = new Bundle();
-    b.putParcelableArray("algorithms", algos);
+    b.putParcelableArray(BenchmarkActivity.ALGORITHM_TAG, algos);
 
     Intent i = new Intent(MainActivity.this, BenchmarkActivity.class);
     i.putExtras(b);
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
     customMenuVisible = showCustom;
 
     if(customMenuVisible) {
-      customMenuText.setText(adapter.getSelectedCount() + " of " + adapter.getItemCount() + " selected");
+      customMenuText.setText(String.format(getString(R.string.total_selected_algorithm_count), adapter.getSelectedCount(), adapter.getItemCount()));
     }
   }
 
@@ -252,5 +252,14 @@ public class MainActivity extends AppCompatActivity {
     animator.setInterpolator(new DecelerateInterpolator());
     animator.setDuration(200);
     animator.start();
+  }
+
+  @Override
+  public void onBackPressed() {
+    if(!isCurrentlySelecting) {
+      super.onBackPressed();
+    } else {
+      deselectAll();
+    }
   }
 }

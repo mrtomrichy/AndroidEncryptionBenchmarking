@@ -26,6 +26,8 @@ import java.util.ArrayList;
  */
 public class BenchmarkActivity extends AppCompatActivity {
 
+  public static final String ALGORITHM_TAG = "algorithms";
+
   BenchmarkTask.BenchmarkCallbacks callbacks = new BenchmarkTask.BenchmarkCallbacks() {
     @Override
     public void updateProgress(BenchmarkResult result) {
@@ -36,7 +38,7 @@ public class BenchmarkActivity extends AppCompatActivity {
 
     @Override
     public void benchmarkStarted() {
-      runButton.setText("Stop");
+      runButton.setText(R.string.stop);
       keySizeInput.setEnabled(false);
       dataSizeInput.setEnabled(false);
       mResultsText.setText("");
@@ -45,12 +47,12 @@ public class BenchmarkActivity extends AppCompatActivity {
 
     @Override
     public void benchmarkFinished(int successfulEncryptions) {
-      runButton.setText("Run");
+      runButton.setText(R.string.run);
       runButton.setEnabled(true);
       keySizeInput.setEnabled(true);
       dataSizeInput.setEnabled(true);
       currentTask = null;
-      mResultsText.setText(successfulEncryptions + "/" + results.size() + " successful encryptions");
+      mResultsText.setText(String.format(getString(R.string.encryption_success_count), successfulEncryptions, results.size()));
     }
   };
 
@@ -72,8 +74,8 @@ public class BenchmarkActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_benchmark);
 
-    if(getIntent().getExtras().containsKey("algorithms")) {
-      Parcelable[] parcelableArray = getIntent().getExtras().getParcelableArray("algorithms");
+    if(getIntent().getExtras().containsKey(ALGORITHM_TAG)) {
+      Parcelable[] parcelableArray = getIntent().getExtras().getParcelableArray(ALGORITHM_TAG);
       selectedAlgorithms = new Algorithm[parcelableArray.length];
       System.arraycopy(parcelableArray, 0, selectedAlgorithms, 0, parcelableArray.length);
     } else {
@@ -81,9 +83,9 @@ public class BenchmarkActivity extends AppCompatActivity {
     }
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    getSupportActionBar().setTitle("Benchmark");
+    getSupportActionBar().setTitle(R.string.benchmark);
     if(selectedAlgorithms.length != 1) {
-      getSupportActionBar().setSubtitle(selectedAlgorithms.length + " algorithms selected");
+      getSupportActionBar().setSubtitle(String.format(getString(R.string.selected_algorithm_count), selectedAlgorithms.length));
     } else {
       getSupportActionBar().setSubtitle(selectedAlgorithms[0].name);
     }
