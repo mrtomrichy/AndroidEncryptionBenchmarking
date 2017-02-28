@@ -4,36 +4,36 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Algorithm implements Parcelable {
-  public String name;
+    public String name;
 
-  public Algorithm(String name) {
-    this.name = name;
-  }
+    public Algorithm(String name) {
+        this.name = name;
+    }
 
-  protected Algorithm(Parcel in) {
-    name = in.readString();
-  }
+    protected Algorithm(Parcel in) {
+        name = in.readString();
+    }
 
 
-  public static final Creator<Algorithm> CREATOR = new Creator<Algorithm>() {
+    public static final Creator<Algorithm> CREATOR = new Creator<Algorithm>() {
+        @Override
+        public Algorithm createFromParcel(Parcel in) {
+            return new Algorithm(in);
+        }
+
+        @Override
+        public Algorithm[] newArray(int size) {
+            return new Algorithm[size];
+        }
+    };
+
     @Override
-    public Algorithm createFromParcel(Parcel in) {
-      return new Algorithm(in);
+    public int describeContents() {
+        return 0;
     }
 
     @Override
-    public Algorithm[] newArray(int size) {
-      return new Algorithm[size];
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
     }
-  };
-
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel parcel, int i) {
-    parcel.writeString(name);
-  }
 }

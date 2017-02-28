@@ -12,67 +12,67 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class Encryption {
 
-  private static byte[] keyValue = getRandomByteArray(16);
+    private static byte[] keyValue = getRandomByteArray(16);
 
-  public static void setKeySize(int size) {
-    keyValue = getRandomByteArray(size);
-  }
-
-  public static int getKeySize() {
-    return keyValue.length/8;
-  }
-
-  public static Algorithm[] getSupportedEncryptionTypes() {
-    TreeSet<String> algos = new TreeSet<>();
-    for (Provider p : Security.getProviders()) {
-      for (Map.Entry<Object, Object> e : p.entrySet()) {
-        String s = e.getKey().toString()
-            + " -> " + e.getValue().toString();
-        if (s.startsWith("Alg.Alias.")) {
-          s = s.substring(10);
-        }
-
-        if(s.contains("Cipher")) {
-          s = s.substring("Cipher.".length(), s.indexOf(' '));
-          algos.add(s);
-        }
-      }
+    public static void setKeySize(int size) {
+        keyValue = getRandomByteArray(size);
     }
 
-    Algorithm[] array = new Algorithm[algos.size()];
-    int count = 0;
-    for(String a : algos) {
-      array[count] = new Algorithm(a);
-      count++;
+    public static int getKeySize() {
+        return keyValue.length / 8;
     }
 
-    return array;
-  }
+    public static Algorithm[] getSupportedEncryptionTypes() {
+        TreeSet<String> algos = new TreeSet<>();
+        for (Provider p : Security.getProviders()) {
+            for (Map.Entry<Object, Object> e : p.entrySet()) {
+                String s = e.getKey().toString()
+                        + " -> " + e.getValue().toString();
+                if (s.startsWith("Alg.Alias.")) {
+                    s = s.substring(10);
+                }
 
-  public static byte[] getRandomByteArray(int size){
-    byte[] result = new byte[size];
-    Random random = new Random();
-    random.nextBytes(result);
-    return result;
-  }
+                if (s.contains("Cipher")) {
+                    s = s.substring("Cipher.".length(), s.indexOf(' '));
+                    algos.add(s);
+                }
+            }
+        }
 
-  public static byte[] encrypt(byte[] Data, String algorithm) throws Exception {
-    Key key = generateKey(algorithm);
-    Cipher c = Cipher.getInstance(algorithm);
-    c.init(Cipher.ENCRYPT_MODE, key);
+        Algorithm[] array = new Algorithm[algos.size()];
+        int count = 0;
+        for (String a : algos) {
+            array[count] = new Algorithm(a);
+            count++;
+        }
 
-    return c.doFinal(Data);
-  }
+        return array;
+    }
 
-  public static byte[] decrypt(byte[] encryptedData, String algorithm) throws Exception {
-    Key key = generateKey(algorithm);
-    Cipher c = Cipher.getInstance(algorithm);
-    c.init(Cipher.DECRYPT_MODE, key);
+    public static byte[] getRandomByteArray(int size) {
+        byte[] result = new byte[size];
+        Random random = new Random();
+        random.nextBytes(result);
+        return result;
+    }
 
-    return c.doFinal(encryptedData);
-  }
+    public static byte[] encrypt(byte[] Data, String algorithm) throws Exception {
+        Key key = generateKey(algorithm);
+        Cipher c = Cipher.getInstance(algorithm);
+        c.init(Cipher.ENCRYPT_MODE, key);
 
-  private static Key generateKey(String algorithm) throws Exception {
-    return new SecretKeySpec(keyValue, algorithm);
-  }
+        return c.doFinal(Data);
+    }
+
+    public static byte[] decrypt(byte[] encryptedData, String algorithm) throws Exception {
+        Key key = generateKey(algorithm);
+        Cipher c = Cipher.getInstance(algorithm);
+        c.init(Cipher.DECRYPT_MODE, key);
+
+        return c.doFinal(encryptedData);
+    }
+
+    private static Key generateKey(String algorithm) throws Exception {
+        return new SecretKeySpec(keyValue, algorithm);
+    }
 }

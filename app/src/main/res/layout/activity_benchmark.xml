@@ -1,102 +1,104 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                tools:context=".ui.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ui.MainActivity">
 
     <View
-        android:focusable="true" android:focusableInTouchMode="true"
-        android:layout_width="0px" android:layout_height="0px"
-        android:id="@+id/linearLayout"/>
+        android:id="@+id/linearLayout"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
         android:id="@+id/keySize"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="false"
-        android:hint="@string/key_size"
-        android:layout_toRightOf="@+id/keyLabel"
-        android:textSize="14sp"
-        android:layout_marginLeft="16dp"/>
-
-    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/keyLabel"
         android:ems="10"
+        android:hint="@string/key_size"
+        android:inputType="number"
+        android:textSize="14sp" />
+
+    <EditText
         android:id="@+id/dataSize"
-        android:hint="@string/data_size"
-        android:layout_below="@+id/keySize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/keySize"
-        android:textSize="14sp"/>
+        android:layout_below="@+id/keySize"
+        android:ems="10"
+        android:hint="@string/data_size"
+        android:inputType="number"
+        android:textSize="14sp" />
 
     <Button
+        android:id="@+id/runButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/run"
-        android:id="@+id/runButton"
-        android:textSize="14sp"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/dataSize"
-        android:layout_alignParentEnd="true"/>
+        android:text="@string/run"
+        android:textSize="14sp" />
 
     <ProgressBar
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:progressTint="@color/accent"
-        android:layout_below="@+id/runButton"/>
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/runButton"
+        android:progressTint="@color/accent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/resultsList"
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/progressBar"/>
+        android:layout_below="@+id/progressBar"
+        android:scrollbars="vertical" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/resultText"
-        android:fontFamily="sans-serif-condensed"
-        android:text="@string/result"
-        android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/runButton"
-        android:layout_below="@+id/dataSize"
-        android:gravity="center_vertical"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/key_size"
-        android:id="@+id/keyLabel"
-        android:textSize="14sp"
+        android:layout_alignBottom="@+id/runButton"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/dataSize"
         android:fontFamily="sans-serif-condensed"
+        android:gravity="center_vertical"
+        android:text="@string/result"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/keyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/keySize"
         android:layout_alignBottom="@+id/keySize"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/key_size"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="14sp" />
 
     <TextView
+        android:id="@+id/dataLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/data_size"
-        android:id="@+id/dataLabel"
-        android:textSize="14sp"
-        android:fontFamily="sans-serif-condensed"
         android:layout_alignBaseline="@+id/dataSize"
         android:layout_alignBottom="@+id/dataSize"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/data_size"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="14sp" />
 
 </RelativeLayout>
