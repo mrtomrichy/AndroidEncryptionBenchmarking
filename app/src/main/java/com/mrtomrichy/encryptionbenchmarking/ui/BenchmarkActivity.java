@@ -1,5 +1,6 @@
 package com.mrtomrichy.encryptionbenchmarking.ui;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -94,6 +95,8 @@ public class BenchmarkActivity extends AppCompatActivity {
         dataSizeInput = (EditText) findViewById(R.id.dataSize);
         mResultsText = (TextView) findViewById(R.id.resultText);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        mProgressBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.accent), PorterDuff.Mode.SRC_IN);
 
         runButton = (Button) findViewById(R.id.runButton);
         runButton.setOnClickListener(new View.OnClickListener() {
