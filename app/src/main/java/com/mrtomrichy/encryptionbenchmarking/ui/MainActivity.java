@@ -13,10 +13,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mrtomrichy.encryptionbenchmarking.R;
@@ -30,7 +30,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton fab;
-    private RelativeLayout layout;
+    private ViewGroup layout;
     private float maxTranslationY;
     private boolean isFabHidden = false;
     private boolean isCurrentlySelecting = false;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(adapter);
 
         fab = (FloatingActionButton) findViewById(R.id.benchmarkButton);
-        layout = (RelativeLayout) findViewById(R.id.mainActivityLayout);
+        layout = (ViewGroup) findViewById(R.id.mainActivityLayout);
 
         layout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

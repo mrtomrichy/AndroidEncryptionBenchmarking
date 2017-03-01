@@ -16,4 +16,6 @@
     <string name="time_taken">%dms</string>
     <string name="cancel">Cancel</string>
     <string name="all">All</string>
+    <string name="default_data_size">100000</string>
+    <string name="default_key_size">16</string>
 </resources>

@@ -1,104 +1,108 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.BenchmarkActivity">
 
     <View
-        android:id="@+id/linearLayout"
-        android:layout_width="0px"
-        android:layout_height="0px"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:focusable="true"
         android:focusableInTouchMode="true" />
 
-    <EditText
-        android:id="@+id/keySize"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@+id/keyLabel"
-        android:ems="10"
-        android:hint="@string/key_size"
-        android:inputType="number"
-        android:textSize="14sp" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/dataSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/keySize"
-        android:layout_below="@+id/keySize"
-        android:ems="10"
-        android:hint="@string/data_size"
-        android:inputType="number"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/keyLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:minWidth="100dp"
+            android:text="@string/key_size"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/runButton"
-        android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/keySize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/key_size"
+            android:inputType="number"
+            android:text="@string/default_key_size"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/dataSize"
-        android:text="@string/run"
-        android:textSize="14sp" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dataLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:minWidth="100dp"
+            android:text="@string/data_size"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/dataSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/data_size"
+            android:inputType="number"
+            android:text="@string/default_data_size"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/resultText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_vertical"
+            android:text="@string/result"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <Button
+            android:id="@+id/runButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/run"
+            android:textSize="14sp" />
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/runButton"
-        android:progressTint="@color/accent" />
+        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/resultsList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/progressBar"
+        android:layout_height="wrap_content"
         android:scrollbars="vertical" />
 
-    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/runButton"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/dataSize"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="center_vertical"
-        android:text="@string/result"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/keyLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/keySize"
-        android:layout_alignBottom="@+id/keySize"
-        android:layout_alignParentStart="true"
-        android:fontFamily="sans-serif-condensed"
-        android:text="@string/key_size"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/dataLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/dataSize"
-        android:layout_alignBottom="@+id/dataSize"
-        android:layout_alignParentStart="true"
-        android:fontFamily="sans-serif-condensed"
-        android:text="@string/data_size"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="14sp" />
-
-</RelativeLayout>
+</LinearLayout>

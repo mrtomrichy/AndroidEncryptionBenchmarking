@@ -60,7 +60,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ResultsV
             resultsViewHolder.nameText.setTextColor(context.getResources().getColor(android.R.color.secondary_text_dark));
             resultsViewHolder.timeText.setTextColor(context.getResources().getColor(android.R.color.secondary_text_dark));
             resultsViewHolder.timeText.setText(String.format(context.getString(R.string.time_taken), item.timeTaken));
-            resultsViewHolder.timeText.setOnClickListener(null);
+            resultsViewHolder.itemView.setOnClickListener(null);
         }
     }
 

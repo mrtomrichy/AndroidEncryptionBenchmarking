@@ -108,10 +108,6 @@ public class BenchmarkActivity extends AppCompatActivity {
             }
         });
 
-        keySizeInput.setText("16");
-        dataSizeInput.setText("100000");
-
-
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.resultsList);
         mRecyclerView.setHasFixedSize(true);
 
